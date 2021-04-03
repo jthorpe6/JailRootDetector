@@ -1,0 +1,81 @@
+#+TITLE: jailrootDetector
+
+Attempted automation to detect root and jailbreak detection in mobile applications.
+
+* Example Usage
+
+There are 2 text files that include common detection strings like "jailbroken" and "rooted" as well as a few others. The script leverages [[https://www.radare.org/r/][radare2]] and [[https://sourceware.org/binutils/docs/binutils/strings.html][GNU strings]] to attempt to quickly identify if that application is going to give you a hard time.
+
+** Demo
+
+#+begin_src shell :results output :dir ./jailrootdetector/
+  python3 ./main.py --help
+#+end_src
+
+The script *does not* extract the IPA or APK, It assums you know how to do that ;) .
+
+#+RESULTS:
+: usage: main.py [-h] (--dex DEX | --ios IOS)
+: 
+: [+] root & jailbreak detection
+: 
+: optional arguments:
+:   -h, --help  show this help message and exit
+:   --dex DEX   path to android dex file
+:   --ios IOS   path to extracted payload binary
+
+Once you have an extracted app, then run the script with the relevant option, for example;
+
+#+begin_src shell :results output :dir ./jailrootdetector/
+  python3 ./main.py --ios ./Documents/IPAs/Discord/Payload/Discord.app/Discord
+#+end_src
+
+Then the script will atempt to find hard-coded well known detection strings, frist with [[https://www.radare.org/r/][radare2]] and then falls back to [[https://sourceware.org/binutils/docs/binutils/strings.html][GNU strings]].
+
+#+RESULTS:
+#+begin_example
+[+] "jailbroken" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
+0x100d1be97 11 10 jailbroken
+0x100d1c0dc 13 12 isJailbroken
+0x100d1c0e9 22 21 TB,R,N,V_isJailbroken
+0x100ddcc6b 20 19 computeIsJailbroken
+0x100ddcd0a 13 12 isJailbroken
+0x100ddcd57 14 13 _isJailbroken
+
+
+[+] "/Applications/Cydia.app" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
+/Applications/Cydia.app
+
+
+[+] "/bin/bash" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
+/bin/bash
+
+
+[+] "/bin/sh" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
+/bin/sh
+
+#+end_example
+
+* Installation
+
+I've tried to be clever and use [[https://python-poetry.org/][poetry]], so it should be as simple as install [[https://www.radare.org/r/][radare2]] then clone this repo and run =poetry install=.
+
+#+begin_src shell :results silent
+  git clone https://gitlab.com/JxTx/jailrootdetector && \
+    cd jailrootdetector && \
+    poetry install && \
+    cd jailrootdetector && \
+    python3 ./main.py
+#+end_src
+
+However, if that fails, here is a checklist of dependencies.
+
+ - [[https://www.radare.org/r/][radare2]]
+   - Use the [[https://www.radare.org/r/down.html][installation documentation]] for this.
+ - [[https://www.radare.org/n/r2pipe.html][r2pipe]]
+   - This can be installed with =pip3 install r2pipe=
+ - [[https://pypi.org/project/sh/][sh]]
+   - This can be installed with =pip3 install sh=
+ - [[https://sourceware.org/binutils/docs/binutils/strings.html][GNU Strings]]
+   - This should already be installed on your system, if not you should be able to install it with your package manager.
+
