@@ -8,7 +8,7 @@ There are 2 text files that include common detection strings like "jailbroken" a
 
 ** Demo
 
-#+begin_src shell :results output :dir ./jailrootdetector/
+#+begin_src shell :results output :dir ./jailrootdetector/ :exports both
   python3 ./main.py --help
 #+end_src
 
@@ -26,7 +26,7 @@ The script *does not* extract the IPA or APK, It assums you know how to do that 
 
 Once you have an extracted app, then run the script with the relevant option, for example;
 
-#+begin_src shell :results output :dir ./jailrootdetector/
+#+begin_src shell :results output :dir ./jailrootdetector/ :exports both
   python3 ./main.py --ios ./Documents/IPAs/Discord/Payload/Discord.app/Discord
 #+end_src
 
