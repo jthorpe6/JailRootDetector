@@ -13,10 +13,13 @@ def get_args():
 
 
 def string_search(app, string):
-    r_pipe = r2pipe.open(app)
-    r_strings = r_pipe.cmd('izzq~+{}'.format(string))
-    if r_strings:
-        return r_strings
+    try:
+        r_pipe = r2pipe.open(app)
+        r_strings = r_pipe.cmd('izzq~+{}'.format(string))
+        if r_strings:
+            return r_strings
+    except Exception:
+        pass
 
     # /bin/strings if radare2 fails
     sh_strings = sh.strings(app)
@@ -32,17 +35,12 @@ def main():
 
     if args.dex:
         app = args.dex
-        try:
-            strings = open('roots.txt', 'r')
-        except FileNotFoundError:
-            print('[!] did not find a file called "roots.txt"')
-            sys.exit()
+        from jailrootdetector.detections import root_strings
+        strings = root_strings
     elif args.ios:
         app = args.ios
-        try:
-            strings = open('jailbreaks.txt', 'r')
-        except FileNotFoundError:
-            print('[!] did not find a file called "jailbreaks.txt"')
+        from jailrootdetector.detections import jailbreak_strings
+        strings = jailbreak_strings
     else:
         sys.exit()
 
@@ -51,8 +49,6 @@ def main():
         if search_em:
             print('[+] "{}" detected in {}'.format(string.strip(), app))
             print('{}\n'.format(search_em))
-
-    strings.close()
 
 
 if __name__ == '__main__':
