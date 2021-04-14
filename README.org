@@ -4,7 +4,7 @@ Attempted automation to detect root and jailbreak detection in mobile applicatio
 
 * Example Usage
 
-There are 2 text files that include common detection strings like "jailbroken" and "rooted" as well as a few others. The script leverages [[https://www.radare.org/r/][radare2]] and [[https://sourceware.org/binutils/docs/binutils/strings.html][GNU strings]] to attempt to quickly identify if that application is going to give you a hard time.
+Detect common detection strings like "jailbroken" and "rooted" as well as a few others. The script leverages [[https://www.radare.org/r/][radare2]] and [[https://sourceware.org/binutils/docs/binutils/strings.html][GNU strings]] to attempt to quickly identify if that application is going to give you a hard time.
 
 ** Demo
 
