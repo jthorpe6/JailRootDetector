@@ -9,13 +9,13 @@ There are 2 text files that include common detection strings like "jailbroken" a
 ** Demo
 
 #+begin_src shell :results output :dir ./jailrootdetector/ :exports both
-  python3 ./main.py --help
+  jrd --help
 #+end_src
 
 The script *does not* extract the IPA or APK, It assums you know how to do that ;) .
 
 #+RESULTS:
-: usage: main.py [-h] (--dex DEX | --ios IOS)
+: usage: jrd [-h] (--dex DEX | --ios IOS)
 : 
 : [+] root & jailbreak detection
 : 
@@ -27,7 +27,7 @@ The script *does not* extract the IPA or APK, It assums you know how to do that 
 Once you have an extracted app, then run the script with the relevant option, for example;
 
 #+begin_src shell :results output :dir ./jailrootdetector/ :exports both
-  python3 ./main.py --ios ./Documents/IPAs/Discord/Payload/Discord.app/Discord
+  jrd --ios ./Documents/IPAs/Discord/Payload/Discord.app/Discord
 #+end_src
 
 Then the script will atempt to find hard-coded well known detection strings, frist with [[https://www.radare.org/r/][radare2]] and then falls back to [[https://sourceware.org/binutils/docs/binutils/strings.html][GNU strings]].
@@ -58,17 +58,22 @@ Then the script will atempt to find hard-coded well known detection strings, fri
 
 * Installation
 
-I've tried to be clever and use [[https://python-poetry.org/][poetry]], so it should be as simple as install [[https://www.radare.org/r/][radare2]] then clone this repo and run =poetry install=.
+You can install with =pip3=, but your'll need a [[https://gitlab.com/-/profile/personal_access_tokens][personal access token]].
 
-#+begin_src shell :results silent
+#+begin_src shell :results output
+  pip3 install jailrootdetector --extra-index-url https://__token__:<your_personal_token>@gitlab.com/api/v4/projects/25621217/packages/pypi/simple
+#+end_src
+
+Or you can install with [[https://python-poetry.org/][poetry]]
+
+#+begin_src shell :results output
   git clone https://gitlab.com/JxTx/jailrootdetector && \
     cd jailrootdetector && \
     poetry install && \
-    cd jailrootdetector && \
-    python3 ./main.py
+    jrd --help
 #+end_src
 
-However, if that fails, here is a checklist of dependencies.
+if all else fails, here is a checklist of dependencies.
 
  - [[https://www.radare.org/r/][radare2]]
    - Use the [[https://www.radare.org/r/down.html][installation documentation]] for this.
