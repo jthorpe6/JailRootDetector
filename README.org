@@ -58,10 +58,10 @@ Then the script will atempt to find hard-coded well known detection strings, fri
 
 * Installation
 
-You can install with =pip3=, but your'll need a [[https://gitlab.com/-/profile/personal_access_tokens][personal access token]].
+You can install with =pip3=.
 
 #+begin_src shell :results output
-  pip3 install jailrootdetector --extra-index-url https://__token__:<your_personal_token>@gitlab.com/api/v4/projects/25621217/packages/pypi/simple
+  pip3 install jailrootdetector
 #+end_src
 
 Or you can install with [[https://python-poetry.org/][poetry]]
@@ -70,6 +70,7 @@ Or you can install with [[https://python-poetry.org/][poetry]]
   git clone https://gitlab.com/JxTx/jailrootdetector && \
     cd jailrootdetector && \
     poetry install && \
+    poetry shell
     jrd --help
 #+end_src
 

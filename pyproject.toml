@@ -1,8 +1,10 @@
 [tool.poetry]
 name = "jailrootDetector"
 version = "0.1.0"
-description = ""
+description = "Identify root and jailbreak detection in mobile applications"
 authors = ["JxTx <joethorpe6@protonmail.com>"]
+readme = "README.org"
+repository = "https://gitlab.com/JxTx/jailrootdetector"
 
 [tool.poetry.dependencies]
 python = "^3.7"
