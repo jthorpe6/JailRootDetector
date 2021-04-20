@@ -34,26 +34,20 @@ Then the script will atempt to find hard-coded well known detection strings, fri
 
 #+RESULTS:
 #+begin_example
-[+] "jailbroken" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
-0x100d1be97 11 10 jailbroken
-0x100d1c0dc 13 12 isJailbroken
-0x100d1c0e9 22 21 TB,R,N,V_isJailbroken
-0x100ddcc6b 20 19 computeIsJailbroken
-0x100ddcd0a 13 12 isJailbroken
-0x100ddcd57 14 13 _isJailbroken
+  [+] searching
 
+  [+] detection strings found: 
 
-[+] "/Applications/Cydia.app" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
-/Applications/Cydia.app
-
-
-[+] "/bin/bash" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
-/bin/bash
-
-
-[+] "/bin/sh" detected in ./Documents/IPAs/Discord/Payload/Discord.app/Discord
-/bin/sh
-
+  /Applications/Cydia.app
+  /bin/sh
+  /bin/bash
+  jailbroken
+  0x100d1be97 11 10 jailbroken
+  0x100d1c0dc 13 12 isJailbroken
+  0x100d1c0e9 22 21 TB,R,N,V_isJailbroken
+  0x100ddcc6b 20 19 computeIsJailbroken
+  0x100ddcd0a 13 12 isJailbroken
+  0x100ddcd57 14 13 _isJailbroken
 #+end_example
 
 * Installation

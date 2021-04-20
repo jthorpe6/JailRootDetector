@@ -12,22 +12,22 @@ def get_args():
     return parser.parse_args()
 
 
-def string_search(app, string):
-    try:
-        r_pipe = r2pipe.open(app)
-        r_strings = r_pipe.cmd('izzq~+{}'.format(string))
-        if r_strings:
-            return r_strings
-    except Exception:
-        pass
+def string_search(app, strings):
+    for string in strings:
+        try:
+            r_pipe = r2pipe.open(app)
+            r_strings = r_pipe.cmd('izzq~+{}'.format(string))
+            if r_strings:
+                yield r_strings
+        except Exception:
+            pass
 
     # /bin/strings if radare2 fails
     sh_strings = sh.strings(app)
     for line in sh_strings:
-        if string in line:
-            return line
-
-    return False
+        for string in strings:
+            if string in line:
+                yield line
 
 
 def main():
@@ -44,11 +44,14 @@ def main():
     else:
         sys.exit()
 
-    for string in strings:
-        search_em = string_search(app, string)
-        if search_em:
-            print('[+] "{}" detected in {}'.format(string.strip(), app))
-            print('{}\n'.format(search_em))
+    print('\n[+] searching\n')
+    search_results = set(string_search(app, strings))
+    if search_results:
+        print('[+] detection strings found:')
+        for string in search_results:
+            print('{}'.format(string.strip()))
+    else:
+        print('[+] no detection strings found in: {}'.format(app))
 
 
 if __name__ == '__main__':
